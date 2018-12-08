@@ -1,10 +1,10 @@
 #include <string>
 #include <iostream>
 
-bool checkPalindrome(int testInt) {
-    std::string testString = std::to_string(testInt);
-    for (int i = 0; i < testString.length()/2; ++i) {
-        if (testString[i] == testString[testString.length()-(i+1)]) {
+bool check_palindrome(int test_int) {
+    std::string test_string = std::to_string(test_int);
+    for (int i = 0; i < test_string.length()/2; ++i) {
+        if (test_string[i] == test_string[test_string.length()-(i+1)]) {
             continue;
         }
         else {
@@ -14,11 +14,20 @@ bool checkPalindrome(int testInt) {
     return true;
 }
 
-int findLargestPal() {
-    
+int find_largest_pal() {
+    int curr_max = -1;
+    for (int i = 999; i > 99; i--) {
+        for (int j = 999; j > 99; j--) {
+            if (check_palindrome(i*j) && i * j > curr_max) {
+                curr_max = i*j;
+            }
+        }
+    }
+    return curr_max;
 }
 
 int main() {
     //std::cout << checkPalindrome(42) << std::endl;
-    std::cout << findLargestPal() << std::endl;
+    //std::cout << checkPalindrome(424) << std::endl;
+    std::cout << find_largest_pal() << std::endl;
 }
