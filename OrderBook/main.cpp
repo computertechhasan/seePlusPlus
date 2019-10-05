@@ -127,6 +127,9 @@ int main() {
     double twentysix = 26.00;
     double twentytwo = 22.00;
     double twentyfive = 25.00;
+    double twentyone = 21.00;
+    double twentyfour = 24.00;
+    double twenty = 20.00;
 
 
     // /*
