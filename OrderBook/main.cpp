@@ -48,23 +48,23 @@ struct LimitOrderBook {
         this->depth = depth * 10000;
         this->print_depth = depth;
     }
-    void add_ask(double price, double volume) {
-        if (volume != 0) {
-            this->asks[price] = volume;
+    void add_ask(double* price, double* volume) {
+        if (*volume != 0) {
+            this->asks[*price] = *volume;
         }
         else if (volume == 0) {
-            this->asks.erase(price);
+            this->asks.erase(*price);
         }
         else {
             std::cout << "Something weird happened adding an ask" << std::endl;
         }  
     }
-    void add_bid(double price, double volume) {
-        if (volume != 0) {
-            this->bids[price] = volume;
+    void add_bid(double* price, double* volume) {
+        if (*volume != 0) {
+            this->bids[*price] = *volume;
         }
         else if (volume == 0) {
-            this->bids.erase(price);
+            this->bids.erase(*price);
         }
         else {
             std::cout << "Something weird happened adding an bid" << std::endl;
@@ -123,9 +123,15 @@ int main() {
     
     
 
-    /*
+    double twentythree = 23.00;
+    double twentysix = 26.00;
+    double twentytwo = 22.00;
+    double twentyfive = 25.00;
+
+
+    // /*
     auto start_time = std::chrono::high_resolution_clock::now();
-    my_book.add_ask(23.00, 26.00);
+    my_book.add_ask(&23.00, &26.00);
     auto end_time = std::chrono::high_resolution_clock::now();
     my_book.update_times.push_back((std::chrono::duration_cast<std::chrono::nanoseconds>(end_time-start_time)).count());
     start_time = std::chrono::high_resolution_clock::now();
@@ -144,12 +150,12 @@ int main() {
     
     my_book.print_book();
     my_book.print_update_stats();
-    */
+    // */
 
-    ///*
+    /*
     std::vector<double> average_updates;
 
-    for (int j = 0; j < 10000; ++j) {
+    for (int j = 0; j < 1000; ++j) {
         auto my_book = LimitOrderBook(PRODUCT_ID, DEPTH);
         double curr_price = 0;
         double curr_volume = 0;
@@ -158,16 +164,16 @@ int main() {
         BOA change;
         std::vector<BOA> bids;
         std::vector<BOA> asks;
-        for (int i = 0; i < 99999; ++i) {
+        for (int i = 0; i < 9999; ++i) {
             change = BOA();
             start_time = std::chrono::high_resolution_clock::now();
 
             if (current_message_type == "l2update") {
                 if (change.side == "sell") {
-                    my_book.add_ask(change.price, change.volume);
+                    my_book.add_ask(&change.price, &change.volume);
                 }
                 else if (change.side == "buy") {
-                    my_book.add_bid(change.price, change.volume);
+                    my_book.add_bid(&change.price, &change.volume);
                 }
             }
             end_time = std::chrono::high_resolution_clock::now();
@@ -186,5 +192,5 @@ int main() {
     }
     double curr_avg = curr_sum / double(average_updates.size());
     std::cout << "Across J passes of I max depth, the average update was " << curr_avg << " microseconds " << std::endl;
-    // */
+    */
 }
