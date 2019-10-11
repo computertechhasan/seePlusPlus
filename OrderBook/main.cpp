@@ -101,7 +101,7 @@ struct LimitOrderBook {
             double curr_avg = curr_sum / double(this->update_times.size()) / 1000.0;
             return curr_avg;
         }
-        
+        return 0.0;   
     }
     void print_update_stats() {
         if (this->update_times.size() != 0) {
@@ -118,6 +118,7 @@ struct LimitOrderBook {
 int main() {
     std::string PRODUCT_ID = "BTC-USD";
     int DEPTH = 5;
+    auto my_book = LimitOrderBook(PRODUCT_ID, DEPTH);
 
     std::string current_message_type = "l2update";
     
@@ -132,33 +133,33 @@ int main() {
     double twenty = 20.00;
 
 
-    // /*
+    /*
     auto start_time = std::chrono::high_resolution_clock::now();
-    my_book.add_ask(&23.00, &26.00);
+    my_book.add_ask(&twentythree, &twentysix);
     auto end_time = std::chrono::high_resolution_clock::now();
     my_book.update_times.push_back((std::chrono::duration_cast<std::chrono::nanoseconds>(end_time-start_time)).count());
     start_time = std::chrono::high_resolution_clock::now();
-    my_book.add_ask(22.00, 25.00);
+    my_book.add_ask(&twentytwo, &twentyfive);
     end_time = std::chrono::high_resolution_clock::now();
     my_book.update_times.push_back((std::chrono::duration_cast<std::chrono::nanoseconds>(end_time-start_time)).count());
 
-    start_time = std::chrono::high_resolution_clock::now();
-    my_book.add_bid(21.00, 24.00);
+    start_time = std::chrono::high_resolution_clllvmock::now();
+    my_book.add_bid(&twentyone, &twentyfour);
     end_time = std::chrono::high_resolution_clock::now();
     my_book.update_times.push_back((std::chrono::duration_cast<std::chrono::nanoseconds>(end_time-start_time)).count());
     start_time = std::chrono::high_resolution_clock::now();
-    my_book.add_bid(20.00, 23.00);
+    my_book.add_bid(&twenty, &twentythree);
     end_time = std::chrono::high_resolution_clock::now();
     my_book.update_times.push_back((std::chrono::duration_cast<std::chrono::nanoseconds>(end_time-start_time)).count());
     
     my_book.print_book();
     my_book.print_update_stats();
-    // */
+    */
 
-    /*
+    // /*
     std::vector<double> average_updates;
 
-    for (int j = 0; j < 1000; ++j) {
+    for (int j = 0; j < 5000; ++j) {
         auto my_book = LimitOrderBook(PRODUCT_ID, DEPTH);
         double curr_price = 0;
         double curr_volume = 0;
@@ -180,8 +181,9 @@ int main() {
                 }
             }
             end_time = std::chrono::high_resolution_clock::now();
+            //std::cout << "curr time" << std::chrono::duration_cast<std::chrono::nanoseconds>(end_time-start_time).count() << std::endl;
             my_book.update_times.push_back((std::chrono::duration_cast<std::chrono::nanoseconds>(end_time-start_time)).count());
-            if (i == 99998) {
+            if (i == 9998) {
                 //my_book.print_book();
                 //my_book.print_update_stats();
                 average_updates.push_back(my_book.get_update_stats());
@@ -195,5 +197,6 @@ int main() {
     }
     double curr_avg = curr_sum / double(average_updates.size());
     std::cout << "Across J passes of I max depth, the average update was " << curr_avg << " microseconds " << std::endl;
-    */
+    // */
+    return 0;
 }
