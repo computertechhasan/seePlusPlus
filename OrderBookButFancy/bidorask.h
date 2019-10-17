@@ -3,22 +3,17 @@
 
 #include <string>
 
-namespace BOA {
-    class BOA {
-        public:
-            BOA();
-            double MAX_PRICE;
-            double MAX_VOLUME;
-            double MIN_PRICE;
-            double MIN_VOLUME;
-            double price;
-            double volume;
-            std::string side;
-        private:
-            std::string sideOfOrder();
-            double random_price();
-            double random_volume();
-    };
-}
+class BOA {
+    public:
+        BOA(double price, double volume, std::string side);
+        double get_price();
+        double get_volume();
+        void set_price(double price);
+        void set_volume(double volume);
+    private:
+        double price;
+        double volume;
+        std::string side;
+};
 
 #endif
