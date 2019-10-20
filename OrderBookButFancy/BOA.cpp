@@ -1,5 +1,9 @@
-#include "bidorask.h"
+#include "BOA.h"
 #include <string>
+
+BOA::BOA() {
+
+}
 
 BOA::BOA(double price, double volume, std::string side) {
     this->price = price;
@@ -10,12 +14,15 @@ BOA::BOA(double price, double volume, std::string side) {
 double BOA::get_price() {
     return this->price;
 }
+
 double BOA::get_volume() {
     return this->volume;
 }
+
 void BOA::set_price(double price) {
     this->price = price;
 }
+
 void BOA::set_volume(double volume) {
     this->volume = volume;
 }

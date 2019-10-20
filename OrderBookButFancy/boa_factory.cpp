@@ -20,6 +20,11 @@ BOA BOAFactory::create_boa() {
     return BOA(random_price(), random_volume(), side);
 }
 
+std::string BOAFactory::create_boa_json() {
+    BOA curr_boa = this->create_boa();
+    return "{\"type\":\"l2update\",\"price\":\"" + std::to_string(curr_boa.get_price()) + "\",\"volume\":\"" + std::to_string(curr_boa.get_volume()) + "\",\"side\":\"" + curr_boa.side + "\"}";
+}
+
 double BOAFactory::random_price() {
     return ((double)rand() / RAND_MAX) * (this->max_price - this->min_price) + this->min_price;
 }

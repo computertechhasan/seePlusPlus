@@ -2,33 +2,28 @@
 #define ORDERBOOK_H
 
 #include <string>
-#include "bidorask.h"
+#include "BOA.h"
 #include <map>
 #include <vector>
 
-class LimitOrderBook {
+class OrderBook {
     public:
-    LimitOrderBook(std::string product_id, int depth);
+        OrderBook(std::string product_id, int depth);
+        void add_bid(BOA new_bid);
+        void add_ask(BOA new_ask);
+        BOA get_best_bid();
+        BOA get_best_ask();
+        void print_book();
+        std::vector<double> update_times;
+        double get_update_average();
+        double get_update_variance();
+        void print_update_stats();
     private:
         std::string product_id;
         int print_depth;
         int depth;
         std::map<double, double> bids;
         std::map<double, double> asks;
-        std::vector<double> update_times;
-};
-
-class BOAFactory {
-    public:
-        BOAFactory(double min_price, double max_price, double min_volume, double max_volume);
-        BOA create_boa();
-    private:
-        double min_price;
-        double max_price;
-        double min_volume;
-        double max_volume;
-        double random_price();
-        double random_volume();
 };
 
 #endif
