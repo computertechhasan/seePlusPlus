@@ -2,8 +2,12 @@
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 #include <iostream>
+#include <chrono>
 
 int main() {
+    std::chrono::high_resolution_clock::time_point start_time;
+    std::chrono::high_resolution_clock::time_point end_time;
+    int64_t curr_time;
     double price = 25.02;
     double volume = 13.22;
     const char* side = "sell";
@@ -11,7 +15,12 @@ int main() {
     std::cout << new_boa << std::endl;
 
     rapidjson::Document my_json_doc;
+    start_time = std::chrono::high_resolution_clock::now();
     my_json_doc.Parse(new_boa.c_str());
+    end_time = std::chrono::high_resolution_clock::now();
+    curr_time = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time-start_time).count();
+
+    std::cout << "curr time is " << curr_time << "ns" << std::endl;
 
     double curr_price = atof(my_json_doc["price"].GetString());
     double curr_vol = atof(my_json_doc["volume"].GetString());

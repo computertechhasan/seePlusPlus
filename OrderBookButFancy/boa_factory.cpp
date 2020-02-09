@@ -17,7 +17,7 @@ BOA BOAFactory::create_boa() {
     else {
         side = "sell";
     }
-    return BOA(random_price(), random_volume(), side);
+    return BOA(this->random_price(this->min_price, this->max_price), this->random_volume(this->min_volume, this->max_volume), side);
 }
 
 std::string BOAFactory::create_boa_json() {
@@ -25,10 +25,10 @@ std::string BOAFactory::create_boa_json() {
     return "{\"type\":\"l2update\",\"price\":\"" + std::to_string(curr_boa.get_price()) + "\",\"volume\":\"" + std::to_string(curr_boa.get_volume()) + "\",\"side\":\"" + curr_boa.side + "\"}";
 }
 
-double BOAFactory::random_price() {
-    return ((double)rand() / RAND_MAX) * (this->max_price - this->min_price) + this->min_price;
+double BOAFactory::random_price(double min_price, double max_price) {
+    return ((double)rand() / RAND_MAX) * (max_price - min_price) + min_price;
 }
 
-double BOAFactory::random_volume() {
-    return ((double)rand() / RAND_MAX) * (this->max_volume - this->min_volume) + this->min_volume;
+double BOAFactory::random_volume(double min_volume, double max_volume) {
+    return ((double)rand() / RAND_MAX) * (max_volume - min_volume) + min_volume;
 }

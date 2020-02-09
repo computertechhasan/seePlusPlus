@@ -14,8 +14,8 @@ class BOAFactory {
         double max_price;
         double min_volume;
         double max_volume;
-        double random_price();
-        double random_volume();
+        static double random_price(double min_price, double max_price);
+        static double random_volume(double min_volume, double max_volume);
 };
 
 #endif
