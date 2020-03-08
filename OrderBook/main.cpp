@@ -158,8 +158,9 @@ int main() {
 
     // /*
     std::vector<double> average_updates;
-
-    for (int j = 0; j < 5000; ++j) {
+    int jMax = 500;
+    int iMax = 9999;
+    for (int j = 0; j < jMax; ++j) {
         auto my_book = LimitOrderBook(PRODUCT_ID, DEPTH);
         double curr_price = 0;
         double curr_volume = 0;
@@ -168,7 +169,7 @@ int main() {
         BOA change;
         std::vector<BOA> bids;
         std::vector<BOA> asks;
-        for (int i = 0; i < 9999; ++i) {
+        for (int i = 0; i < iMax; ++i) {
             change = BOA();
             start_time = std::chrono::high_resolution_clock::now();
 
@@ -183,7 +184,7 @@ int main() {
             end_time = std::chrono::high_resolution_clock::now();
             //std::cout << "curr time" << std::chrono::duration_cast<std::chrono::nanoseconds>(end_time-start_time).count() << std::endl;
             my_book.update_times.push_back((std::chrono::duration_cast<std::chrono::nanoseconds>(end_time-start_time)).count());
-            if (i == 9998) {
+            if (i == iMax-1) {
                 //my_book.print_book();
                 //my_book.print_update_stats();
                 average_updates.push_back(my_book.get_update_stats());
@@ -196,7 +197,7 @@ int main() {
         curr_sum += *it;
     }
     double curr_avg = curr_sum / double(average_updates.size());
-    std::cout << "Across J passes of I max depth, the average update was " << curr_avg << " microseconds " << std::endl;
+    std::cout << "Across " << jMax << " passes of I max depth " << iMax <<", the average update was " << curr_avg << " microseconds " << std::endl;
     // */
     return 0;
 }

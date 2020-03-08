@@ -7,19 +7,11 @@ int reverse(int x) {
     std::string currNum = std::to_string(x);
     std::string reversed = "";
     for (int i = 0; i < currNum.length(); ++i) {
-        std::cout << currNum[currNum.length() - i] << std::endl;
-        reversed.append(currNum[currNum.length() - i], 1);
+        //std::cout << currNum[currNum.length() - i] << std::endl;
+        reversed += currNum[currNum.length() - i - 1];
     }
-    std::cout << reversed << std::endl;
     return atoi(reversed.c_str());
 }
-
-
-
-
-
-
-
 
 
 int main() {
