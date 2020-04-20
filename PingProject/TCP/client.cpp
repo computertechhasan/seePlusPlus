@@ -15,6 +15,7 @@ int main() {
     struct sockaddr_in server_address;
     server_address.sin_family = AF_INET;
     server_address.sin_port = htons(PORT);
+    char buffer[data_len] = {0};
     inet_pton(AF_INET, "127.0.0.1", &(server_address.sin_addr));
 
     int client_socket = socket(AF_INET, SOCK_STREAM, 0);
@@ -29,13 +30,14 @@ int main() {
         return 0;
     }
     int send_message = send(client_socket, message, strlen(message), 0);
-
     if (send_message == -1) {
         std::cout << "There was an error sending!" << std::endl;
         return 0;
     }
     else {
         std::cout << "Client sent the message:" << message << std::endl;
-        return 0;
+        // return 0;
     }
+    int server_response = read(client_socket, buffer, data_len);
+    std::cout << "Server responded:" << buffer << std::endl;
 } 

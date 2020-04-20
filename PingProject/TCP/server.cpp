@@ -11,6 +11,7 @@ int main() {
     int data_len = 1024;
     int bytes_received;
     unsigned char buf[data_len];
+    const char * server_message = "hi i am the server";
 
     // create socket and get fd
     int server_socket = socket(AF_INET, SOCK_STREAM, 0);
@@ -50,5 +51,7 @@ int main() {
             buf[bytes_received] = 0;
             std::cout << "Got message:" << buf << std::endl;
         }
+        send(read_socket, server_message, strlen(server_message), 0);
+        std::cout << "server responded with" << server_message << std::endl;
     }
 }
