@@ -109,8 +109,17 @@ int main(int argc, char** argv) {
     int ages = 6;
     assign_age(ages);
     std::cout << "i know what this does lol " << ages << std::endl;
-    assign_age(&ages);
+    int* middle_man = NULL;
+    middle_man = &ages;
+    assign_age(middle_man);
     std::cout << "age is " << ages << std::endl;
+
+    int int_arr[] = {1, 2, 3, 4, 5};
+    int* int_pt_array = int_arr;
+    std::cout << "this should be be 1: " << *int_pt_array << std::endl;
+    int_pt_array++;
+    std::cout << "this should be 2: " << *int_pt_array << std::endl;
+
 
     return 0;
 }
